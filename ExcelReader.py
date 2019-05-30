@@ -9,10 +9,6 @@ import datetime
 def parseWork(path):
     wb = openpyxl.load_workbook(path)
     all_sheets = wb.get_sheet_names()
-    print(all_sheets)
-    # for i in range(len(all_sheets)):
-    #     sheet = wb.get_sheet_by_name(all_sheets[i])
-    #     print(sheet.title + ': max_row: ' + str(sheet.max_row) + '  max_column: ' + str(sheet.max_column))
     for i in range(len(all_sheets)):
         sheet = wb.get_sheet_by_name(all_sheets[i])
         print(sheet.title + ': max_row: ' + str(sheet.max_row) + '  max_column: ' + str(sheet.max_column))
@@ -20,13 +16,11 @@ def parseWork(path):
         for column in sheet.iter_cols():
             for cell2 in column:
                 if cell2.value is not None:
-                    #  print(cell2.value)
                     info2 = cell2.value.find('支撑人员')
                     if info2 == 0:
                         print(cell2.value)
                         row, col = cell2.row, cell2.column
                         break
-                        # print(row, col)
         works = {}
         while row < sheet.max_row:
             row = row + 1
