@@ -11,14 +11,13 @@ def parseWork(path):
     all_sheets = wb.get_sheet_names()
     for i in range(len(all_sheets)):
         sheet = wb.get_sheet_by_name(all_sheets[i])
-        print(sheet.title + ': max_row: ' + str(sheet.max_row) + '  max_column: ' + str(sheet.max_column))
+        # print(sheet.title + ': max_row: ' + str(sheet.max_row) + '  max_column: ' + str(sheet.max_column))
 
         for column in sheet.iter_cols():
             for cell2 in column:
                 if cell2.value is not None:
                     info2 = cell2.value.find('支撑人员')
                     if info2 == 0:
-                        print(cell2.value)
                         row, col = cell2.row, cell2.column
                         break
         works = {}
