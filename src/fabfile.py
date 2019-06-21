@@ -33,8 +33,19 @@ for c in group:
     result = c.run('uname -s', warn=True)
     print(result)
 
+# 远程服务器，使用私钥登录
 c = Connection('yyi@yyifamily.tk', connect_kwargs={"key_filename": "F:\download\my-ssh-key"})
 result = c.run('uname -s')
+
+# 执行本地命令,hide隐藏标准输出
+from invoke import run
+#import  invoke
+
+result = run('dir /w', hide=True, warn=True)
+if (result.ok):
+    print("result:{0},out:{1}".format(result.ok, result.stdout))
+else:
+    print("result:{0},out:{1}".format(result.ok, result.stderr))
 
 from fabric import task
 
