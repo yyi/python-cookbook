@@ -4,6 +4,7 @@ import gzip
 import bz2
 import re
 
+
 def gen_find(filepat, top):
     '''
     Find all filenames in a directory tree that match a shell wildcard pattern
@@ -11,6 +12,7 @@ def gen_find(filepat, top):
     for path, dirlist, filelist in os.walk(top):
         for name in fnmatch.filter(filelist, filepat):
             yield os.path.join(path, name)
+
 
 def gen_opener(filenames):
     '''
@@ -27,6 +29,7 @@ def gen_opener(filenames):
         yield f
         f.close()
 
+
 def gen_concatenate(iterators):
     '''
     Chain a sequence of iterators together into a single sequence.
@@ -34,14 +37,16 @@ def gen_concatenate(iterators):
     for it in iterators:
         yield from it
 
+
 def gen_grep(pattern, lines):
     '''
     Look for a regex pattern in a sequence of lines
     '''
-    pat = re.compile(pattern)
+    pat = re.compile(pattern, flags=re.RegexFlag.IGNORECASE)
     for line in lines:
         if pat.search(line):
             yield line
+
 
 if __name__ == '__main__':
 
@@ -58,6 +63,6 @@ if __name__ == '__main__':
     files = gen_opener(lognames)
     lines = gen_concatenate(files)
     pylines = gen_grep('(?i)python', lines)
-    bytecolumn = (line.rsplit(None,1)[1] for line in pylines)
+    bytecolumn = (line.rsplit(None, 1)[1] for line in pylines)
     bytes = (int(x) for x in bytecolumn if x != '-')
     print('Total', sum(bytes))

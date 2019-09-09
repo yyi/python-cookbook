@@ -10,6 +10,9 @@ line = 'asdf fjdk; afed, fjek,asdf,      foo'
 parts = re.split(r'[;,\s]\s*', line)
 print(parts)
 
+parts = re.split(r';|,|\s+', line)
+print(parts)
+
 # (b) Splitting with a capture group
 fields = re.split(r'(;|,|\s)\s*', line)
 print(fields)

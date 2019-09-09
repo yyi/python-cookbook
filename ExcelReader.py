@@ -8,15 +8,15 @@ import datetime
 
 def parseWork(path):
     wb = openpyxl.load_workbook(path)
-    all_sheets = wb.get_sheet_names()
+    all_sheets = wb.sheetnames
     for i in range(len(all_sheets)):
-        sheet = wb.get_sheet_by_name(all_sheets[i])
+        sheet = wb[all_sheets[i]]
         # print(sheet.title + ': max_row: ' + str(sheet.max_row) + '  max_column: ' + str(sheet.max_column))
 
         col, row = getWorkByPerson(sheet)
         while row < sheet.max_row:
             row = row + 1
-            if sheet.cell(row, col).value:
+            if sheet.cell(row, col).value and sheet.cell(row, col + 2).value:
                 yield sheet.cell(row, col).value, '\n'.join(
                     [re.search(r"方正项目周报（([\w-]+至[\w-]+)）", path).group(1) + ':',
                      re.sub(r"\n[\s| ]*\n", '\n', sheet.cell(row, col + 2).value)])
@@ -33,7 +33,7 @@ def getWorkByPerson(sheet):
 
 
 def getWorks():
-    regex = r"方正项目周报（(2019-[3-5]-[0-9]{1,2})至"
+    regex = r"方正项目周报（(2019-[6-8]-[0-9]{1,2})至"
     fileList = [item for item in os.listdir('.') if re.match(regex, item)]
     fileList.sort(key=lambda k: datetime.datetime.strptime(re.search(regex, k).group(1), '%Y-%m-%d'))
     print(fileList)

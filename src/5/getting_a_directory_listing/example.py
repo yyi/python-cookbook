@@ -4,7 +4,7 @@ import os
 import os.path
 import glob
 
-pyfiles = glob.glob('*.py')
+pyfiles = glob.glob('../*/*.py')
 
 # Get file sizes and modification dates
 name_sz_date = [(name, os.path.getsize(name), os.path.getmtime(name))

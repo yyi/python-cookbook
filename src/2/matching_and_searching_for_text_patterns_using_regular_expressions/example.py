@@ -13,6 +13,7 @@ print(datepat.findall(text))
 
 # (b) Find all matching dates with capture groups
 datepat = re.compile(r'(\d+)/(\d+)/(\d+)')
+print(datepat.findall(text))
 for month, day, year in datepat.findall(text):
     print('{}-{}-{}'.format(year, month, day))
 

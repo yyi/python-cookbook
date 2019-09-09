@@ -1,13 +1,15 @@
 # Example of flattening a nested sequence using subgenerators
 
-from collections import Iterable
+from collections.abc import Iterable
 
-def flatten(items, ignore_types=(str, bytes)):
-    for x in items:
-        if isinstance(x, Iterable) and not isinstance(x, ignore_types):
-            yield from flatten(x)
+
+def flatten(its, ignore_types=(str, bytes)):
+    for i in its:
+        if isinstance(i, Iterable) and not isinstance(i, ignore_types):
+            yield from flatten(i)
         else:
-            yield x
+            yield i
+
 
 items = [1, 2, [3, 4, [5, 6], 7], 8]
 
