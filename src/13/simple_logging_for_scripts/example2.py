@@ -1,6 +1,7 @@
 import logging
 import logging.config
 
+
 def main():
     # Configure the logging system
     logging.config.fileConfig('logconfig.ini')
@@ -17,6 +18,7 @@ def main():
     logging.warning('Feature is deprecated')
     logging.info('Opening file %r, mode=%r', filename, mode)
     logging.debug('Got here')
+
 
 if __name__ == '__main__':
     main()
