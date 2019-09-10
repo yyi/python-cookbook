@@ -1,10 +1,12 @@
 import logging
 
+
 def main():
     # Configure the logging system
     logging.basicConfig(
-        filename='app.log',
-        level=logging.ERROR
+        # filename='app.log',
+        level=logging.ERROR,
+        handlers=[logging.FileHandler('app.log'), logging.StreamHandler()]
     )
 
     # Variables (to make the calls that follow work)
@@ -19,6 +21,7 @@ def main():
     logging.warning('Feature is deprecated')
     logging.info('Opening file %r, mode=%r', filename, mode)
     logging.debug('Got here')
+
 
 if __name__ == '__main__':
     main()
