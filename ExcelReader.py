@@ -33,8 +33,10 @@ def getWorkByPerson(sheet):
 
 
 def getWorks():
-    regex = r"方正项目周报（(2019-[6-8]-[0-9]{1,2})至"
+    regex = r"方正项目周报（((2019|2020)-(9|10|11)-[0-9]{1,2})至"
     fileList = [item for item in os.listdir('.') if re.match(regex, item)]
+    # for k in fileList:
+    #     print(re.search(regex, k).groups())
     fileList.sort(key=lambda k: datetime.datetime.strptime(re.search(regex, k).group(1), '%Y-%m-%d'))
     print(fileList)
 
