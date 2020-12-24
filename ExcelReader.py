@@ -33,7 +33,7 @@ def getWorkByPerson(sheet):
 
 
 def getWorks():
-    regex = r"方正项目周报（((2019|2020)-(9|10|11)-[0-9]{1,2})至"
+    regex = r"方正项目周报（((2019|2020)-(10|11|12)-[0-9]{1,2})至"
     fileList = [item for item in os.listdir('.') if re.match(regex, item)]
     # for k in fileList:
     #     print(re.search(regex, k).groups())
@@ -50,4 +50,4 @@ def getWorks():
 os.chdir('F:\\document')
 with open('data.txt ', 'w') as f:
     for item, value in getWorks().items():
-        f.write('\n' + item + value)
+        f.write('\n' + (item + value).replace('\xa0', ' '))
